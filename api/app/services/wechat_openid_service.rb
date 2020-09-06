@@ -17,11 +17,11 @@ class WechatOpenidService
   private
 
   def app_id
-    Rails.application.secrets.wx_mp_app_id
+    Rails.application.credentials.wx_mp_app_id
   end
 
   def app_secret
-    Rails.application.secrets.wx_mp_app_secret
+    Rails.application.credentials.wx_mp_app_secret
   end
 
   def params

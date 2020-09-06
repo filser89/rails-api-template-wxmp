@@ -1,14 +1,14 @@
 require 'jwt'
 
 class TokenService
-  def self.encode(payload, expiration = Rails.application.secrets.jwt_expiration_seconds.to_i.seconds.from_now)
+  def self.encode(payload, expiration = Rails.application.credentials.jwt_expiration_seconds.to_i.seconds.from_now)
     payload = payload.dup
     payload[:exp] = expiration.to_i
-    JWT.encode(payload, Rails.application.secrets.jwt_token_secret_key)
+    JWT.encode(payload, Rails.application.credentials.jwt_token_secret_key)
   end
 
   def self.decode(token)
-    JWT.decode(token, Rails.application.secrets.jwt_token_secret_key)
+    JWT.decode(token, Rails.application.credentials.jwt_token_secret_key)
   rescue JWT::ExpiredSignature, JWT::DecodeError
     false
   end
