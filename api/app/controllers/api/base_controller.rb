@@ -46,7 +46,7 @@ module Api
     end
 
     def authenticate_api_key!
-      unless request.headers['API-key'] == Rails.application.secrets.api_key
+      unless request.headers['API-key'] == Rails.application.credentials.api_key
         return render json: { error: { message: I18n.t('errors.failure.invalid_api_key'), code: nil } }, status: :unauthorized
       end
     end
